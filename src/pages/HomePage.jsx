@@ -2,7 +2,7 @@ import './home.css';
 
 function Home() {
     return (
-        <div className="App">
+        <div className="Home">
             <header className="App-header">
 
             </header>
