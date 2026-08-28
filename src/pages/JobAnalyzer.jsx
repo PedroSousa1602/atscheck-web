@@ -1,6 +1,9 @@
 import './job.css';
+import { useNavigate } from 'react-router-dom';
 
 function Analyzer() {
+    const navigate = useNavigate();
+
     return (
         <div className="Analyzer">
             <header className="headerHome">
@@ -12,8 +15,8 @@ function Analyzer() {
                     <span>Ats</span>Check
                 </h1>
                 <div className="butoes">
-                    <button className="analyzeCV" onClick={() => (window.location.href = '/PdfAnalyzer.jsx')}>Analisar CV</button>
-                    <button className="analyzeJob" onClick={() => (window.location.href = '/JobAnalyzer.jsx')}>Analisar CV e Vaga</button>
+                    <button className="analyzeCV" onClick={() => navigate('/PdfAnalyzer')}>Analisar CV</button>
+                    <button className="analyzeJob" onClick={() => navigate('/JobAnalyzer')}>Analisar CV e Vaga</button>
                 </div>
 
             </header>
