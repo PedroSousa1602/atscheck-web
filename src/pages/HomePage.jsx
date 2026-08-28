@@ -12,8 +12,8 @@ function Home() {
                     <span>Ats</span>Check
                 </h1>
                 <div className="butoes">
-                    <button className="analyzeCV">Analisar CV</button>
-                    <button className="analyzeJob">Analisar CV e Vaga</button>
+                    <button className="analyzeCV" onClick={() => (window.location.href = '/PdfAnalyzer.jsx')}>Analisar CV</button>
+                    <button className="analyzeJob" onClick={() => (window.location.href = '/JobAnalyzer.jsx')}>Analisar CV e Vaga</button>
                 </div>
 
             </header>
