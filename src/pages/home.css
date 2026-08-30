@@ -52,6 +52,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background: #f8f8f8;
 }
 .headerHome {
     position: fixed;
@@ -151,7 +152,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 90px;
-    padding: 100px 70px;
+    padding: 120px 80px;
 }
 
 .container h2 {
