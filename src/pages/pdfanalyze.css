@@ -1,84 +1,62 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
 
-:root{
+:root {
     --azul: #1E40AF;
+    --azul-hover: #1e3a8a;
     --laranja: #F97316;
-    --cinza: #CCCCCC;
+    --laranja-hover: #ea580c;
+    --cinza: #E2E8F0;
+    --verde: #10B981;
+    --texto-principal: #1e293b;
+    --texto-secundario: #64748b;
+    --sombra-suave: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+    --sombra-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
 }
-*{
-    .ubuntu-light {
-        font-family: "Ubuntu", sans-serif;
-        font-weight: 300;
-        font-style: normal;
-    }
-    .ubuntu-regular {
-        font-family: "Ubuntu", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-    }
-    .ubuntu-medium {
-        font-family: "Ubuntu", sans-serif;
-        font-weight: 500;
-        font-style: normal;
-    }
-    .ubuntu-bold {
-        font-family: "Ubuntu", sans-serif;
-        font-weight: 700;
-        font-style: normal;
-    }
-    .ubuntu-light-italic {
-        font-family: "Ubuntu", sans-serif;
-        font-weight: 300;
-        font-style: italic;
-    }
-    .ubuntu-regular-italic {
-        font-family: "Ubuntu", sans-serif;
-        font-weight: 400;
-        font-style: italic;
-    }
-    .ubuntu-medium-italic {
-        font-family: "Ubuntu", sans-serif;
-        font-weight: 500;
-        font-style: italic;
-    }
-    .ubuntu-bold-italic {
-        font-family: "Ubuntu", sans-serif;
-        font-weight: 700;
-        font-style: italic;
-    }
+
+* {
     box-sizing: border-box;
 }
+
 body {
     margin: 0;
     padding: 0;
-    background: #f8f8f8;
-    box-sizing: border-box;
+    background-color: #f8fafc;
+    font-family: "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--texto-principal);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
 }
+
+/* ==================== HEADER (INTACTO & OTIMIZADO) ==================== */
 .headerHome {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    padding: 10px 20px;
-    background-color: var(--cinza);
-
+    padding: 12px 24px;
+    background-color: rgba(226, 232, 240, 0.95);
+    backdrop-filter: blur(8px);
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: left;
+    justify-content: flex-start;
     gap: 12px;
+    z-index: 1000;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .headerHome img {
-    height: 50px;
+    height: 48px;
     width: auto;
     display: block;
+    object-fit: contain;
 }
 
 .headerHome h1 {
     font-family: "Ubuntu", sans-serif;
     color: var(--azul);
     margin: 0;
+    font-size: 1.5rem;
     line-height: 1;
 }
 
@@ -89,60 +67,240 @@ body {
 .butoes {
     position: fixed;
     top: 15px;
-    right: 45px;
+    right: 24px;
     display: flex;
     flex-direction: row;
-    gap: 15px;
-    justify-content: right;
+    gap: 12px;
+    justify-content: flex-end;
     align-items: center;
-
+    z-index: 1001;
 }
 
-/* Estilo individual de cada botão */
 .butoes button {
     position: relative;
-    font-size: 12px;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     text-decoration: none;
-    padding: 1em 2.5em;
-    display: inline-block;
+    padding: 0.8em 1.8em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    border-radius: 6em;
-    transition: all 0.2s;
-    border: none;
+    border-radius: 9999px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(30, 64, 175, 0.1);
     font-family: "Ubuntu", sans-serif;
-    font-weight: bolder;
+    font-weight: 700;
     color: var(--azul);
-    background-color: rgba(255, 255, 255, 0.67);
-    overflow: visible; /* Garante que o efeito do pseudo-elemento ::after seja visível */
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
 }
 
 .butoes button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
 }
 
 .butoes button:active {
-    transform: translateY(-1px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
 }
 
-/* Efeito de animação ao passar o cursor */
-.butoes button::after {
-    content: "";
-    display: inline-block;
-    height: 100%;
+/* ==================== CONTAINER PRINCIPAL ==================== */
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 110px 20px 40px 20px;
+    min-height: 100vh;
+}
+
+.upload-section, .results-section {
+    flex: 1;
+    display: flex;
+}
+
+/* ==================== FORMULÁRIO DE UPLOAD ==================== */
+.upload-card {
+    background: #ffffff;
+    padding: 36px 32px;
+    border-radius: 16px;
+    box-shadow: var(--sombra-suave);
+    border: 1px solid #f1f5f9;
     width: 100%;
-    border-radius: 100px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: all 0.4s;
-    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease;
 }
 
-.butoes button:hover::after {
-    transform: scaleX(1.4) scaleY(1.6);
-    opacity: 0;
+.upload-card:hover {
+    box-shadow: var(--sombra-hover);
+}
+
+.upload-card h2 {
+    color: var(--azul);
+    margin: 0 0 8px 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.upload-subtitle {
+    color: var(--texto-secundario);
+    font-size: 0.9rem;
+    margin: 0 0 24px 0;
+}
+
+.file-dropzone {
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    background-color: #f8fafc;
+    padding: 40px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-dropzone:hover {
+    border-color: var(--azul);
+    background-color: #eff6ff;
+    transform: scale(1.01);
+}
+
+.dropzone-text {
+    color: #475569;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.btn-submit {
+    margin-top: auto;
+    padding: 14px 24px;
+    background-color: var(--azul);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(30, 64, 175, 0.2);
+}
+
+.btn-submit:hover {
+    background-color: var(--laranja);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* ==================== PAINEL DE RESULTADOS ==================== */
+.results-card {
+    background: #ffffff;
+    padding: 36px 32px;
+    border-radius: 16px;
+    box-shadow: var(--sombra-suave);
+    border: 1px solid #f1f5f9;
+    width: 100%;
+    transition: box-shadow 0.3s ease;
+}
+
+.results-card:hover {
+    box-shadow: var(--sombra-hover);
+}
+
+.results-card.placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #cbd5e1;
+    background: rgba(248, 250, 252, 0.5);
+    box-shadow: none;
+    color: #94a3b8;
+    text-align: center;
+    padding: 40px;
+    border-radius: 16px;
+}
+
+.score-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+}
+
+.score-header h3 {
+    margin: 0;
+    color: var(--texto-principal);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.score-subtitle {
+    margin: 4px 0 0 0;
+    color: var(--texto-secundario);
+    font-size: 0.875rem;
+}
+
+.score-badge {
+    background-color: var(--verde);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 6px 18px;
+    border-radius: 9999px;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.suggestions-body h4 {
+    color: #334155;
+    margin: 0 0 16px 0;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.suggestions-list li {
+    padding: 14px 0;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.95rem;
+    color: #334155;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.suggestions-list li:last-child {
+    border-bottom: none;
+}
+
+.suggestions-list li.success {
+    color: #047857;
+}
+
+.suggestions-list li.warning {
+    color: #b45309;
 }
