@@ -6,6 +6,8 @@ function PdfAnalyzer() {
     const [analyzed, setAnalyzed] = useState(false);
     const [file, setFile] = useState(null);
 
+    const [pontuacao, setPontuacao] = useState(null);
+
     const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
         setFile(e.target.files[0]);
@@ -15,6 +17,7 @@ function PdfAnalyzer() {
     const handleFileUpload = async (e) => {
 
         e.preventDefault();
+    
         
         if(!file) {
             console.error('Nenhum ficheiro selecionado.');
@@ -23,14 +26,21 @@ function PdfAnalyzer() {
 
         const formData = new FormData();
         formData.append('file', file);
+        let setresponse = null;
 
         try {
             const response = await api.post('/analyzeCv', formData);
             console.log('Análise concluída:', response.data);
             console.log(file);
             setAnalyzed(true);
+            setresponse = response.data;
         } catch (error) {
             console.error('Erro ao analisar o CV:', error);
+        }
+
+        if(setAnalyzed) {
+            const pontuacaoObtida = setresponse.pontuacaoGeral; 
+            setPontuacao(pontuacaoObtida);
         }
     }
 
@@ -73,7 +83,8 @@ function PdfAnalyzer() {
                                     <h3>Compatibilidade ATS</h3>
                                     <p className="score-subtitle">Resultado da análise automática</p>
                                 </div>
-                                <div className="score-badge">85%</div>
+
+                                <div className="score-badge">{pontuacao}</div>
                             </div>
 
                             <div className="suggestions-body">
