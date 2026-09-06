@@ -7,7 +7,8 @@ function PdfAnalyzer() {
     const [file, setFile] = useState(null);
 
     const [pontuacao, setPontuacao] = useState(null);
-
+    const [palavrasFaltantes, setPalavrasFaltantes] = useState([]);
+    
     const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
         setFile(e.target.files[0]);
@@ -39,8 +40,13 @@ function PdfAnalyzer() {
         }
 
         if(setAnalyzed) {
+            // Atualiza a pontuação com base na resposta da API
             const pontuacaoObtida = setresponse.pontuacaoGeral; 
             setPontuacao(pontuacaoObtida);
+
+            const palavrasFaltantesObtidas = setresponse.palavrasFaltantes;
+            setPalavrasFaltantes(palavrasFaltantesObtidas);
+
         }
     }
 
@@ -90,7 +96,8 @@ function PdfAnalyzer() {
                             <div className="suggestions-body">
                                 <h4>Pontos de Melhoria:</h4>
                                 <ul className="suggestions-list">
-                                    <li className="success">✓ Formato de ficheiro PDF estruturado corretamente.</li>
+                                    {/*TODO: Adicionar lógica para exibir sugestões vindas da API reais com base na análise do CV\*/}
+                                    <li className="success">{palavrasFaltantes}</li>
                                     <li className="warning">⚠️ Adicione mais palavras-chave da sua área na secção de experiência.</li>
                                     <li className="warning">⚠️ Evite utilizar tabelas de múltiplas colunas dentro do documento.</li>
                                 </ul>
@@ -98,7 +105,8 @@ function PdfAnalyzer() {
                         </div>
                     ) : (
                         <div className="results-card placeholder">
-                            <p>Envie o seu CV no formulário ao lado para ver aqui o **Score de Compatibilidade** e as **Sugestões de Otimização**.</p>
+                            <p>Insira o seu curriculo para proceder a analise do mesmo</p>
+                            
                         </div>
                     )}
                 </section>
