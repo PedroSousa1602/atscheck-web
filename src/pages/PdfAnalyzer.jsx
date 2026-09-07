@@ -8,7 +8,9 @@ function PdfAnalyzer() {
 
     const [pontuacao, setPontuacao] = useState(null);
     const [palavrasFaltantes, setPalavrasFaltantes] = useState([]);
-    
+
+    const [isLoading, setIsLoading] = useState(false);
+
     const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
         setFile(e.target.files[0]);
@@ -18,12 +20,14 @@ function PdfAnalyzer() {
     const handleFileUpload = async (e) => {
 
         e.preventDefault();
-    
-        
+
+
         if(!file) {
             console.error('Nenhum ficheiro selecionado.');
             return;
         }
+
+        setIsLoading(true);
 
         const formData = new FormData();
         formData.append('file', file);
@@ -46,7 +50,7 @@ function PdfAnalyzer() {
                     .replace(/\s*```$/, '')      // Remove o ``` do fim
                     .trim();
                 data = JSON.parse(data); // Converte a string para objeto JSON
-                
+
             }
 
             let parsedData = null;
@@ -61,6 +65,8 @@ function PdfAnalyzer() {
             setAnalyzed(true);
         } catch (error) {
             console.error('Erro ao analisar o CV:', error);
+        } finally {
+            setIsLoading(false);
         }
 
         if(setAnalyzed) {
@@ -129,8 +135,12 @@ function PdfAnalyzer() {
                         </div>
                     ) : (
                         <div className="results-card placeholder">
-                            <p>Insira o seu curriculo para proceder a analise do mesmo</p>
-                            
+                            {isLoading && (
+                            <div className="progress-bar-container">
+                                <span className="range__label">A analisar o CV...</span>
+                                <div className="range"></div>
+                            </div>
+                            )}
                         </div>
                     )}
                 </section>
