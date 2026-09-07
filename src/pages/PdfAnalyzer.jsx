@@ -31,17 +31,41 @@ function PdfAnalyzer() {
 
         try {
             const response = await api.post('/analyzeCv', formData);
-            console.log('Análise concluída:', response.data);
-            console.log(file);
+            console.log("Resposta recebida da API");
+            let data = response.data;
+
+            if (typeof data === 'string') {
+                data = data.trim();
+                if (data === '') {
+                    throw new Error("Resposta veio vazia da Api.");
+                }
+
+                data = data
+                    .replace(/^```json\s*/i, '') // Remove o ```json do início
+                    .replace(/^```\s*/i, '')     // Remove apenas ``` se vier sem o "json"
+                    .replace(/\s*```$/, '')      // Remove o ``` do fim
+                    .trim();
+                data = JSON.parse(data); // Converte a string para objeto JSON
+                
+            }
+
+            let parsedData = null;
+
+            // Se chegou aqui com sucesso e tem dados válidos, guarda o resultado
+            if (data && typeof data === 'object') {
+                parsedData = data;
+                console.log("JSON válido recebido:", parsedData);
+                setresponse = parsedData;
+            }
+
             setAnalyzed(true);
-            setresponse = response.data;
         } catch (error) {
             console.error('Erro ao analisar o CV:', error);
         }
 
         if(setAnalyzed) {
             // Atualiza a pontuação com base na resposta da API
-            const pontuacaoObtida = setresponse.pontuacaoGeral; 
+            const pontuacaoObtida = setresponse.pontuacaoGeral;
             setPontuacao(pontuacaoObtida);
 
             const palavrasFaltantesObtidas = setresponse.palavrasFaltantes;
