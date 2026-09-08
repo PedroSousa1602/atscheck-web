@@ -7,7 +7,10 @@ function PdfAnalyzer() {
     const [file, setFile] = useState(null);
 
     const [pontuacao, setPontuacao] = useState(null);
-    const [palavrasFaltantes, setPalavrasFaltantes] = useState([]);
+    const [resumoExecutivo, setResumoExecutivo] = useState([]);
+    const [formatacaoEEstrutura, setFormatacaoEEstrutura] = useState([]);
+    const [palavrasChaveFaltantes, setPalavrasChaveFaltantes] = useState(null);
+    const [sugestoesMetricas, setSugestoesMetricas] = useState([]);
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -69,16 +72,18 @@ function PdfAnalyzer() {
             setIsLoading(false);
         }
 
-        if(setAnalyzed) {
-            // Atualiza a pontuação com base na resposta da API
-            const pontuacaoObtida = setresponse.pontuacaoGeral;
-            setPontuacao(pontuacaoObtida);
+        if (setresponse && typeof setresponse === 'object') {
+    
 
-            const palavrasFaltantesObtidas = setresponse.palavrasFaltantes;
-            setPalavrasFaltantes(palavrasFaltantesObtidas);
+            setAnalyzed(true);
 
+            setPontuacao(setresponse.pontuacaoGeral ?? 0);
+            setResumoExecutivo(setresponse.resumoExecutivo ?? '');
+            setFormatacaoEEstrutura(setresponse.formatacaoEEstrutura ?? []);
+            setPalavrasChaveFaltantes(setresponse.palavrasChaveFaltantes ?? null);
+            setSugestoesMetricas(setresponse.sugestoesMetricas ?? []);
         }
-    }
+}
 
     return (
         <div className="page-wrapper">
@@ -124,14 +129,72 @@ function PdfAnalyzer() {
                             </div>
 
                             <div className="suggestions-body">
-                                <h4>Pontos de Melhoria:</h4>
-                                <ul className="suggestions-list">
-                                    {/*TODO: Adicionar lógica para exibir sugestões vindas da API reais com base na análise do CV\*/}
-                                    <li className="success">{palavrasFaltantes}</li>
-                                    <li className="warning">⚠️ Adicione mais palavras-chave da sua área na secção de experiência.</li>
-                                    <li className="warning">⚠️ Evite utilizar tabelas de múltiplas colunas dentro do documento.</li>
-                                </ul>
-                            </div>
+    <ul className="suggestions-list">
+        {/* 1. Resumo Executivo */}
+        {resumoExecutivo && (
+            <li className="success">{resumoExecutivo}</li>
+        )}
+
+        <h4>Pontos de Melhoria:</h4>
+
+        {/* 2. Problemas de Formatação e Estrutura */}
+        {formatacaoEEstrutura?.map((item, index) => (
+            <li key={`fmt-${index}`} className="warning">
+                ⚠️ <strong>{item.problema}:</strong> {item.solucao}
+            </li>
+        ))}
+
+        {/* 3. Sugestões de Métricas */}
+        {sugestoesMetricas?.map((item, index) => (
+            <li key={`met-${index}`} className="warning">
+                💡 <strong>Trocar:</strong> "{item.passagemOriginal}" ➔ <strong>Por:</strong> "{item.exemploReescrito}"
+            </li>
+        ))}
+    </ul>
+
+    {/* 4. Bloco de Palavras-Chave Faltantes em Badges */}
+    {palavrasChaveFaltantes && (
+        <div className="keywords-section">
+            <h4 className="keywords-title">PALAVRAS-CHAVE FALTANTES</h4>
+
+            {/* Técnicas */}
+            {palavrasChaveFaltantes.tecnicas?.length > 0 && (
+                <div className="keyword-group">
+                    <span className="keyword-label">Técnicas:</span>
+                    <div className="tags-container">
+                        {palavrasChaveFaltantes.tecnicas.map((item, index) => (
+                            <span key={`tec-${index}`} className="tag tag-tecnica">{item}</span>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Ferramentas */}
+            {palavrasChaveFaltantes.ferramentas?.length > 0 && (
+                <div className="keyword-group">
+                    <span className="keyword-label">Ferramentas:</span>
+                    <div className="tags-container">
+                        {palavrasChaveFaltantes.ferramentas.map((item, index) => (
+                            <span key={`ferr-${index}`} className="tag tag-ferramenta">{item}</span>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Soft Skills */}
+            {palavrasChaveFaltantes.softSkills?.length > 0 && (
+                <div className="keyword-group">
+                    <span className="keyword-label">Soft Skills:</span>
+                    <div className="tags-container">
+                        {palavrasChaveFaltantes.softSkills.map((item, index) => (
+                            <span key={`soft-${index}`} className="tag tag-soft">{item}</span>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </div>
+    )}
+</div>
                         </div>
                     ) : (
                         <div className="results-card placeholder">
