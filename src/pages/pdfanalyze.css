@@ -57,10 +57,10 @@ body {
 }
 
 .headerHome h1 {
+    font-family: "Ubuntu", sans-serif;
     color: var(--azul);
     margin: 0;
-    font-size: 1.4rem;
-    font-weight: 700;
+    line-height: 1;
 }
 
 .headerHome h1 span {
