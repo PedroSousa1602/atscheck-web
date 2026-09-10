@@ -1,8 +1,11 @@
-import { useState} from 'react';
+import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from './services/Api';
 import './PdfAnalyze.css';
 
 function PdfAnalyzer() {
+    
+    const navigate = useNavigate();
     const [analyzed, setAnalyzed] = useState(false);
     const [file, setFile] = useState(null);
 
@@ -94,8 +97,8 @@ function PdfAnalyzer() {
                 <h1>Ats<span>Check</span></h1>
 
                 <div className="butoes">
-                    <button className="btn-nav">Analisar CV</button>
-                    <button className="btn-nav">Analisar CV e Vaga</button>
+                    <button className="analyzeCV" onClick={() => navigate('/PdfAnalyzer')}>Analisar CV</button>
+                    <button className="analyzeJob" onClick={() => navigate('/JobAnalyzer')}>Analisar CV e Vaga</button>
                 </div>
             </header>
 
