@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from './services/Api';
-import './PdfAnalyze.css';
+import './pdfAnalyze.css';
 
 function PdfAnalyzer() {
     
