@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from './services/Api';
-import './pdfAnalyze.css';
+import './pdfanalyze.css';
 
 function PdfAnalyzer() {
     
@@ -94,7 +94,9 @@ function PdfAnalyzer() {
                 <a href="/">
                     <img src="src/pages/images/logo.png" alt="Logo" />
                 </a>
-                <h1>Ats<span>Check</span></h1>
+                <h1>
+                    <span>Ats</span>Check
+                </h1>
 
                 <div className="butoes">
                     <button className="analyzeCV" onClick={() => navigate('/PdfAnalyzer')}>Analisar CV</button>
