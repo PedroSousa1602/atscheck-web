@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
-import Home from './pages/HomePage'
-import AnalyzerCV from './pages/PdfAnalyzer'
-import Analyzer from './pages/JobAnalyzer'
+import Home from './pages/Home/HomePage'
+import AnalyzerCV from './pages/PdfAnalyze/PdfAnalyzer'
+import Analyzer from './pages/JobAnalyze/JobAnalyzer'
 
 
 function App() {
