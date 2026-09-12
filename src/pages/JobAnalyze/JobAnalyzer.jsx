@@ -38,8 +38,11 @@ function Analyzer() {
         formData.append('file', file);
         let setresponse = null;
 
+        const jobDescription = e.target.story.value;
+        formData.append('opportunityText', jobDescription);
+
         try {
-            const response = await api.post('/analyzeCv', formData);
+            const response = await api.post('/analyze-CVopportunity', formData, jobDescription);
             console.log("Resposta recebida da API");
             let data = response.data;
 
@@ -116,7 +119,7 @@ function Analyzer() {
                             <span className="dropzone-text">Clique aqui ou arraste o ficheiro .PDF</span>
                         </label>
 
-                        <label for="story">Descreva a vaga de emprego</label>
+                        <label htmlFor="story">Descreva a vaga de emprego</label>
                         <textarea id="story" name="story" rows="5" cols="33"></textarea>
 
                         <button type="submit" className="btn-submit">Analisar Currículo</button>
