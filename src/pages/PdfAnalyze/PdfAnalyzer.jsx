@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import api from '../services/Api';
 import './pdfanalyze.css';
 
+
+import {ToastContainer, toast} from 'react-toastify';
+
+
 function PdfAnalyzer() {
     
     const navigate = useNavigate();
@@ -29,7 +33,8 @@ function PdfAnalyzer() {
 
 
         if(!file) {
-            console.error('Nenhum ficheiro selecionado.');
+            let notify = () => toast.info("Nenhum ficheiro selecionado. Por favor, selecione um ficheiro PDF para análise.");
+            notify();
             return;
         }
 
@@ -41,7 +46,6 @@ function PdfAnalyzer() {
 
         try {
             const response = await api.post('/analyzeCv', formData);
-            console.log("Resposta recebida da API");
             let data = response.data;
 
             if (typeof data === 'string') {
@@ -64,13 +68,17 @@ function PdfAnalyzer() {
             // Se chegou aqui com sucesso e tem dados válidos, guarda o resultado
             if (data && typeof data === 'object') {
                 parsedData = data;
-                console.log("JSON válido recebido:", parsedData);
+                const msgBack = "Análise concluída com sucesso!";
+                const notify = () => toast.success(msgBack);
+                notify();
                 setresponse = parsedData;
             }
 
             setAnalyzed(true);
         } catch (error) {
-            console.error('Erro ao analisar o CV:', error);
+            const msgBack = error.response?.data?.message;
+            const notify = () => toast.error(msgBack);
+            notify();
         } finally {
             setIsLoading(false);
         }
@@ -117,6 +125,18 @@ function PdfAnalyzer() {
                         </label>
 
                         <button type="submit" className="btn-submit">Analisar Currículo</button>
+                        <ToastContainer
+                            position="bottom-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick={false}
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="light"
+                            />
                     </form>
                 </section>
 
