@@ -2,6 +2,8 @@ import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/Api';
 import './pdfanalyze.css';
+import logoImg from "../images/Logo.png";
+
 
 
 import {ToastContainer, toast} from 'react-toastify';
@@ -100,7 +102,7 @@ function PdfAnalyzer() {
         <div className="page-wrapper">
             <header className="headerHome">
                 <a href="/">
-                    <img src="src/pages/images/logo.png" alt="Logo" />
+                    <img src={logoImg} alt="Logo" />
                 </a>
                 <h1>
                     <span>Ats</span>Check
