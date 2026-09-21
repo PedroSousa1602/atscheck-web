@@ -1,6 +1,7 @@
 import styles from './home.module.css'; 
 import { useNavigate } from 'react-router-dom';
 import logoImg from '../pages/images/logo.png';
+import HomeImage from '../pages/images/HomeImage.svg';
 
 function Home() {
     const navigate = useNavigate();
@@ -41,7 +42,7 @@ function Home() {
 
                     <button className={styles.Comecar} onClick={() => (window.location.href= "/PdfAnalyzer")}>Começar agora</button>
                 </div>
-                <img className={styles.contImage} src="src/pages/images/HomeImage.svg" alt="Logo" />
+                <img className={styles.contImage} src={HomeImage} alt="Imagem da Página Inicial" />
             </div>
         </div>
     );
