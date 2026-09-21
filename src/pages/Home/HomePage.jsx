@@ -40,7 +40,7 @@ function Home() {
                         Nosso objetivo é destacar candidatos no mercado de trabalho, fornecendo <em>insights</em> valiosos para aumentar suas chances de sucesso profissional.
                     </p>
 
-                    <button className={styles.Comecar} onClick={() => (window.location.href= "/PdfAnalyzer")}>Começar agora</button>
+                    <button className={styles.Comecar} onClick={() => navigate('/PdfAnalyzer')}>Começar agora</button>
                 </div>
                 <img className={styles.contImage} src={HomeImage} alt="Imagem da Página Inicial" />
             </div>
