@@ -1,6 +1,6 @@
 import styles from './home.module.css'; 
 import { useNavigate } from 'react-router-dom';
-import logoImg from '../pages/images/logo.png';
+import logoImg from '../pages/images/Logo.png';
 import HomeImage from '../pages/images/HomeImage.svg';
 
 function Home() {
