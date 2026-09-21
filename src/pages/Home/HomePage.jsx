@@ -1,5 +1,6 @@
 import styles from './home.module.css'; 
 import { useNavigate } from 'react-router-dom';
+import logoImg from '../pages/images/logo.png';
 
 function Home() {
     const navigate = useNavigate();
@@ -9,7 +10,7 @@ function Home() {
             <header className={styles.headerHome}>
 
                 <a href="/">
-                    <img src="src/pages/images/logo.png" alt="Logo" />
+                    <img src={logoImg} alt="Logo" />
                 </a>
                 <h1>
                     <span>Ats</span>Check
